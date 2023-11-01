@@ -1,0 +1,52 @@
+// Initialize Fabric.js canvas for jc-front
+var frontCanvas = new fabric.Canvas('jc-front');
+
+// Initialize Fabric.js canvas for jc-back
+var backCanvas = new fabric.Canvas('jc-back');
+
+// Create arrays to store text objects for each canvas
+var frontCanvasTextObjects = [];
+var backCanvasTextObjects = [];
+
+// Set the canvas size for jc-front
+frontCanvas.setWidth(500); // Set your desired width
+frontCanvas.setHeight(300); // Set your desired height
+
+// Set the canvas size for jc-back
+backCanvas.setWidth(500); // Set your desired width
+backCanvas.setHeight(300); // Set your desired height
+
+// Function to add text to the canvas
+function addTextToCanvas(canvas, textObjects) {
+  // Get the text input value
+  var text = $('#add-txt').val();
+
+  // Get the selected color
+  var selectedColorHex = getSelectedColorHex();
+
+  // Create a Fabric.js text object with the selected color
+  var fabricText = new fabric.Text(text, {
+    left: 50, // Adjust the left position as needed
+    top: 50,  // Adjust the top position as needed
+    fill: selectedColorHex, // Set the fill color of the text
+    originX: 'center', // Set the origin of rotation to center
+    originY: 'center' // Set the origin of rotation to center
+  });
+
+  // Add the text object to the canvas and the respective array
+  canvas.add(fabricText);
+  textObjects.push(fabricText);
+}
+
+// Event listener for the button click to add text to jc-front canvas
+$('#add-text-button-front').on('click', function() {
+  addTextToCanvas(frontCanvas, frontCanvasTextObjects);
+});
+
+// Event listener for the button click to add text to jc-back canvas
+$('#add-text-button-back').on('click', function() {
+  addTextToCanvas(backCanvas, backCanvasTextObjects);
+});
+
+// Now you have separate arrays for text objects on each canvas (frontCanvasTextObjects and backCanvasTextObjects).
+// You can access and modify text objects for each canvas independently.
